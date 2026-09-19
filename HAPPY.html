@@ -1,0 +1,4077 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Career Application</title>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    background: #1c2c69;
+}
+
+.screen {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    opacity: 0;
+
+    transition: opacity .8s ease;
+}
+
+.screen.active {
+    display: flex;
+    opacity: 1;
+}
+
+
+/* =====================================================
+   PAGE 1 - APPLICATION
+===================================================== */
+
+#applicationPage {
+
+    display: block;
+
+    overflow-y: auto;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(70,30,120,.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(0,150,200,.10),
+            transparent 30%
+        ),
+        #f5f7fb;
+}
+
+
+/* HEADER */
+
+.company-header {
+
+    min-height: 80px;
+    width: 100%;
+
+    background: white;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 7%;
+
+    border-bottom: 1px solid #ddd;
+
+    box-shadow:
+        0 3px 15px rgba(0,0,0,.08);
+}
+
+.logo-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.logo-area img {
+
+    width: 110px;
+
+    height: auto;
+
+    object-fit: contain;
+}
+
+.logo-divider {
+
+    width: 1px;
+    height: 32px;
+
+    background: #ddd;
+}
+
+.company-text {
+
+    color: #555;
+
+    font-size: 14px;
+}
+
+.security {
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+
+/* BADGE */
+
+.demo-badge {
+
+    position: fixed;
+
+    top: 88px;
+    right: 25px;
+
+    z-index: 100;
+
+    padding: 9px 16px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #321550,
+            #734a9c
+        );
+
+    color: white;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 5px 20px rgba(50,20,80,.25);
+
+    animation:
+        badgePulse 2s infinite;
+}
+
+@keyframes badgePulse {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+
+/* CONTAINER */
+
+.application-container {
+
+    width: 92%;
+
+    max-width: 1000px;
+
+    margin: 35px auto 60px;
+}
+
+
+/* STEPS */
+
+.steps {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.step {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 12px;
+
+    color: #999;
+}
+
+.step.active {
+
+    color: #351a55;
+
+    font-weight: bold;
+}
+
+.step-number {
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: #e3e6eb;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.step.active .step-number {
+
+    background: #351a55;
+
+    color: white;
+
+    box-shadow:
+        0 0 15px rgba(53,26,85,.3);
+}
+
+.step-line {
+
+    width: 80px;
+
+    height: 2px;
+
+    background: #ddd;
+
+    margin: 0 12px;
+}
+
+
+/* CARD */
+
+.application-card {
+
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 35px;
+
+    border: 1px solid #edf0f4;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.10);
+
+    animation:
+        cardEntry 1s ease;
+}
+
+@keyframes cardEntry {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.application-card h1 {
+
+    font-size: 28px;
+
+    color: #222;
+
+    margin-bottom: 8px;
+}
+
+.subtitle {
+
+    color: #777;
+
+    font-size: 14px;
+
+    margin-bottom: 28px;
+}
+
+
+/* NOTICE */
+
+.notice {
+
+    padding: 15px 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #eef5ff,
+            #f7f1ff
+        );
+
+    border-left: 5px solid #351a55;
+
+    border-radius: 6px;
+
+    color: #555;
+
+    font-size: 13px;
+
+    margin-bottom: 25px;
+}
+
+
+/* FORM */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+.input-group label {
+
+    display: block;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: #555;
+
+    margin-bottom: 7px;
+}
+
+.input-group input,
+.input-group select {
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid #d4d8df;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: .3s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+
+    border-color: #351a55;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(53,26,85,.08);
+}
+
+
+/* DOCUMENTS */
+
+.documents-title {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+}
+
+.documents-title h3 {
+
+    color: #333;
+
+    font-size: 17px;
+}
+
+.documents-title span {
+
+    color: #999;
+
+    font-size: 11px;
+}
+
+.document {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 15px;
+
+    border: 1px solid #e1e4e8;
+
+    border-radius: 8px;
+
+    margin-bottom: 10px;
+
+    transition: .3s;
+}
+
+.document:hover {
+
+    transform: translateX(5px);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.07);
+}
+
+.document-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.document-icon {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 8px;
+
+    background: #f1eef7;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+}
+
+.document-name {
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    color: #333;
+}
+
+.document-status {
+
+    font-size: 11px;
+
+    color: #999;
+
+    margin-top: 3px;
+
+    max-width: 400px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.upload-button {
+
+    padding: 8px 15px;
+
+    border: 1px solid #ccd1d8;
+
+    background: #f8f9fb;
+
+    color: #351a55;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    transition: .3s;
+}
+
+.upload-button:hover {
+
+    background: #eee8f5;
+
+    transform: scale(1.05);
+}
+
+
+/* APPLY */
+
+.apply-section {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 25px;
+
+    padding-top: 22px;
+
+    border-top: 1px solid #eee;
+}
+
+.apply-button {
+
+    border: none;
+
+    padding: 14px 38px;
+
+    border-radius: 7px;
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            90deg,
+            #351a55,
+            #674587,
+            #351a55
+        );
+
+    background-size: 200%;
+
+    box-shadow:
+        0 8px 25px
+        rgba(53,26,85,.25);
+
+    animation:
+        buttonGradient 3s infinite;
+
+    transition: .3s;
+}
+
+.apply-button:hover {
+
+    transform:
+        translateY(-3px)
+        scale(1.03);
+}
+
+@keyframes buttonGradient {
+
+    0% {
+        background-position: 0%;
+    }
+
+    50% {
+        background-position: 100%;
+    }
+
+    100% {
+        background-position: 0%;
+    }
+}
+
+
+/* LOADING */
+
+.loading-box {
+
+    display: none;
+
+    margin-top: 20px;
+}
+
+.loading-bar {
+
+    width: 100%;
+
+    height: 8px;
+
+    border-radius: 10px;
+
+    background: #eee;
+
+    overflow: hidden;
+}
+
+.loading-fill {
+
+    width: 0%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #351a55,
+            #5d91a6,
+            #c22570
+        );
+
+    transition: width .2s;
+}
+
+.loading-text {
+
+    color: #777;
+
+    font-size: 12px;
+
+    margin-top: 8px;
+}
+
+
+/* =====================================================
+   PAGE 2 - CONGRATULATIONS
+===================================================== */
+
+#birthdayPage {
+
+    background:
+        radial-gradient(
+            circle at center,
+            #8e168f,
+            #260033 75%
+        );
+
+    color: white;
+
+    overflow: hidden;
+}
+
+#birthdayPage h1 {
+
+    font-size:
+        clamp(35px,7vw,75px);
+
+    text-align: center;
+
+    z-index: 20;
+
+    animation:
+        titleGlow 2s infinite alternate;
+}
+
+#birthdayPage p {
+
+    font-size: 20px;
+
+    margin-top: 15px;
+
+    z-index: 20;
+}
+
+@keyframes titleGlow {
+
+    from {
+
+        text-shadow:
+            0 0 10px white;
+    }
+
+    to {
+
+        text-shadow:
+            0 0 25px #ff69b4,
+            0 0 55px #ff1493,
+            0 0 90px #ff00ff;
+    }
+}
+
+
+/* BALLOONS */
+
+.balloon {
+
+    position: absolute;
+
+    width: 65px;
+    height: 83px;
+
+    bottom: -150px;
+
+    border-radius: 50%;
+
+    animation:
+        balloonFly
+        5s linear forwards;
+}
+
+.balloon::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 9px;
+    height: 9px;
+
+    background: inherit;
+
+    bottom: -3px;
+
+    left: 28px;
+
+    transform: rotate(45deg);
+}
+
+.balloon::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 2px;
+    height: 130px;
+
+    background:
+        rgba(255,255,255,.7);
+
+    left: 50%;
+
+    top: 80px;
+}
+
+@keyframes balloonFly {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(-8deg);
+    }
+
+    50% {
+        transform:
+            translateY(-55vh)
+            rotate(8deg);
+    }
+
+    100% {
+        transform:
+            translateY(-125vh)
+            rotate(-8deg);
+    }
+}
+
+
+/* =====================================================
+   PAGE 3 - CAKE
+===================================================== */
+
+#cakePage {
+
+    background:
+        radial-gradient(
+            circle,
+            #650087,
+            #160020
+        );
+
+    color: white;
+}
+
+#cakePage h1 {
+
+    font-size:
+        clamp(28px,5vw,48px);
+
+    margin-bottom: 30px;
+
+    animation:
+        titleGlow 2s infinite alternate;
+}
+
+.cake {
+
+    position: relative;
+
+    width: 280px;
+
+    height: 240px;
+}
+
+.cake-body {
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 280px;
+    height: 120px;
+
+    background:
+        linear-gradient(
+            #ff69b4,
+            #df006c
+        );
+
+    border-radius:
+        15px 15px 25px 25px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.5);
+}
+
+.cake-body::after {
+
+    content:
+        "♥  ♥  ♥  ♥";
+
+    position: absolute;
+
+    width: 100%;
+
+    text-align: center;
+
+    bottom: 20px;
+
+    font-size: 20px;
+
+    color:
+        rgba(255,255,255,.8);
+}
+
+.cream {
+
+    position: absolute;
+
+    bottom: 95px;
+
+    width: 280px;
+    height: 38px;
+
+    background: white;
+
+    border-radius: 50%;
+}
+
+.candle {
+
+    position: absolute;
+
+    bottom: 130px;
+
+    width: 25px;
+    height: 70px;
+
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #00e5ff,
+            #00e5ff 7px,
+            white 7px,
+            white 12px
+        );
+
+    border-radius: 5px;
+
+    z-index: 5;
+}
+
+.candle1 {
+    left: 55px;
+}
+
+.candle2 {
+    left: 128px;
+}
+
+.candle3 {
+    left: 200px;
+}
+
+.flame {
+
+    position: absolute;
+
+    width: 25px;
+    height: 36px;
+
+    top: -37px;
+
+    background:
+        linear-gradient(
+            #fff700,
+            #ff7b00
+        );
+
+    border-radius:
+        50% 50% 45% 45%;
+
+    opacity: 0;
+
+    transform: scale(0);
+
+    box-shadow:
+        0 0 20px yellow,
+        0 0 40px orange;
+}
+
+.flame.on {
+
+    opacity: 1;
+
+    transform: scale(1);
+
+    animation:
+        flicker .45s infinite alternate;
+}
+
+@keyframes flicker {
+
+    from {
+        transform:
+            scale(.85)
+            rotate(-3deg);
+    }
+
+    to {
+        transform:
+            scale(1.15)
+            rotate(3deg);
+    }
+}
+
+
+/* =====================================================
+   PAGE 4 - PHOTO
+===================================================== */
+
+#photoPage {
+
+    background:
+        linear-gradient(
+            135deg,
+            #170025,
+            #72008f,
+            #ff1493
+        );
+
+    color: white;
+}
+
+.photo-frame {
+
+    width: 290px;
+    height: 360px;
+
+    padding: 10px;
+
+    background: white;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 0 30px white,
+        0 0 70px #ff69b4,
+        0 0 120px #ff1493;
+
+    animation:
+        photoReveal 2s ease;
+}
+
+.photo-frame img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 14px;
+}
+
+#photoPage h1 {
+
+    margin-top: 25px;
+
+    font-size:
+        clamp(30px,5vw,48px);
+
+    animation:
+        titleGlow 2s infinite alternate;
+}
+
+#photoPage p {
+
+    margin-top: 10px;
+
+    font-size: 18px;
+}
+
+@keyframes photoReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(.2)
+            rotate(-20deg);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0);
+    }
+}
+
+
+/* =====================================================
+   PAGE 5 - BEAUTIFUL MOMENTS
+===================================================== */
+
+#memoryPage {
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            #ff4da6,
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            #6c2cff,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #170025,
+            #42005c,
+            #12001d
+        );
+
+    color: white;
+
+    overflow: hidden;
+}
+
+.memory-bg {
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            white 1px,
+            transparent 1px
+        );
+
+    background-size: 45px 45px;
+
+    opacity: .25;
+
+    animation:
+        memoryStars 15s linear infinite;
+}
+
+@keyframes memoryStars {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(100px);
+    }
+}
+
+.memory-content {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 90%;
+
+    max-width: 900px;
+
+    text-align: center;
+}
+
+.memory-label {
+
+    display: inline-block;
+
+    padding: 8px 18px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    border:
+        1px solid
+        rgba(255,255,255,.3);
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 18px;
+
+    backdrop-filter: blur(10px);
+}
+
+.memory-content h1 {
+
+    font-size:
+        clamp(38px,6vw,65px);
+
+    margin-bottom: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #ffd6f4,
+            #fff
+        );
+
+    -webkit-background-clip: text;
+
+    color: transparent;
+
+    animation:
+        titleGlow 2s infinite alternate;
+}
+
+.memory-subtitle {
+
+    font-size: 17px;
+
+    opacity: .85;
+
+    margin-bottom: 35px;
+}
+
+.memory-timeline {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 20px;
+}
+
+.memory-card {
+
+    padding: 28px 20px;
+
+    min-height: 190px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,.2);
+
+    backdrop-filter:
+        blur(15px);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.3);
+
+    transition:
+        .4s;
+
+    animation:
+        memoryCardIn
+        1s ease backwards;
+}
+
+.memory-card:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.memory-card:nth-child(3) {
+    animation-delay: .4s;
+}
+
+.memory-card:hover {
+
+    transform:
+        translateY(-12px)
+        scale(1.04);
+
+    background:
+        rgba(255,255,255,.17);
+
+    box-shadow:
+        0 25px 70px
+        rgba(255,20,147,.3);
+}
+
+@keyframes memoryCardIn {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(60px)
+            scale(.8);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+.memory-icon {
+
+    font-size: 42px;
+
+    margin-bottom: 15px;
+
+    animation:
+        iconFloat
+        2s infinite alternate;
+}
+
+@keyframes iconFloat {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-8px);
+    }
+}
+
+.memory-card h3 {
+
+    font-size: 21px;
+
+    margin-bottom: 10px;
+}
+
+.memory-card p {
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    opacity: .8;
+}
+
+.memory-bottom {
+
+    margin-top: 30px;
+
+    font-size: 14px;
+
+    opacity: .8;
+
+    animation:
+        fadePulse
+        2s infinite alternate;
+}
+
+@keyframes fadePulse {
+
+    from {
+        opacity: .4;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =====================================================
+   PAGE 6 - SPECIAL WISH
+===================================================== */
+
+#wishPage {
+
+    background:
+        radial-gradient(
+            circle at center,
+            #401080,
+            #10001c 70%,
+            #000
+        );
+
+    color: white;
+
+    overflow: hidden;
+}
+
+.wish-stars {
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            white 1px,
+            transparent 1px
+        );
+
+    background-size:
+        30px 30px;
+
+    opacity: .35;
+
+    animation:
+        wishStarsMove
+        20s linear infinite;
+}
+
+@keyframes wishStarsMove {
+
+    from {
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    to {
+        transform:
+            translateY(80px)
+            scale(1.1);
+    }
+}
+
+.wish-content {
+
+    position: relative;
+
+    z-index: 10;
+
+    text-align: center;
+
+    width: 90%;
+
+    max-width: 800px;
+}
+
+.wish-label {
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    color: #ffd6f4;
+
+    margin-bottom: 18px;
+}
+
+.wish-content h1 {
+
+    font-size:
+        clamp(38px,6vw,68px);
+
+    margin-bottom: 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #ff9ed8,
+            #ffd700,
+            #fff
+        );
+
+    background-size: 300%;
+
+    -webkit-background-clip: text;
+
+    color: transparent;
+
+    animation:
+        wishGradient
+        4s linear infinite;
+}
+
+@keyframes wishGradient {
+
+    from {
+        background-position: 0%;
+    }
+
+    to {
+        background-position: 300%;
+    }
+}
+
+.wish-intro {
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    opacity: .8;
+
+    margin-bottom: 30px;
+}
+
+.wish-moon {
+
+    font-size: 70px;
+
+    margin-bottom: 10px;
+
+    animation:
+        moonFloat
+        3s infinite alternate;
+}
+
+@keyframes moonFloat {
+
+    from {
+        transform:
+            translateY(0)
+            rotate(-5deg);
+    }
+
+    to {
+        transform:
+            translateY(-15px)
+            rotate(5deg);
+    }
+}
+
+.wish-button {
+
+    border: none;
+
+    padding: 15px 32px;
+
+    border-radius: 50px;
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff1493,
+            #8a2be2,
+            #ff1493
+        );
+
+    background-size: 200%;
+
+    box-shadow:
+        0 0 25px
+        rgba(255,20,147,.5);
+
+    animation:
+        wishButtonGlow
+        2s infinite;
+
+    transition:
+        .4s;
+}
+
+.wish-button:hover {
+
+    transform:
+        scale(1.08);
+
+    box-shadow:
+        0 0 50px
+        rgba(255,20,147,.8);
+}
+
+@keyframes wishButtonGlow {
+
+    0%,100% {
+        background-position: 0%;
+    }
+
+    50% {
+        background-position: 100%;
+    }
+}
+
+.wish-message {
+
+    display: none;
+
+    margin-top: 30px;
+
+    padding: 30px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,.09);
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        0 20px 80px
+        rgba(255,20,147,.25);
+}
+
+.wish-message.show {
+
+    display: block;
+
+    animation:
+        wishReveal
+        1.2s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes wishReveal {
+
+    from {
+        opacity: 0;
+        transform:
+            scale(.5)
+            translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+.wish-heart {
+
+    font-size: 45px;
+
+    animation:
+        heartBeat
+        1s infinite alternate;
+}
+
+@keyframes heartBeat {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.25);
+    }
+}
+
+.wish-message h2 {
+
+    font-size: 28px;
+
+    margin: 12px 0;
+}
+
+.wish-message p {
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    color:
+        rgba(255,255,255,.9);
+}
+
+.wish-signature {
+
+    margin-top: 18px;
+
+    font-size: 14px;
+
+    color: #ffd1ec;
+}
+
+
+/* =====================================================
+   PAGE 7 - FINAL GIFT
+===================================================== */
+
+#giftPage {
+
+    background:
+        radial-gradient(
+            circle at center,
+            #9b168f 0%,
+            #48005e 35%,
+            #17001f 70%,
+            #000 100%
+        );
+
+    color: white;
+
+    overflow: hidden;
+}
+
+
+/* STARS */
+
+.stars {
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            white 1px,
+            transparent 1px
+        );
+
+    background-size:
+        35px 35px;
+
+    opacity: .7;
+
+    animation:
+        starsMove
+        20s linear infinite;
+}
+
+@keyframes starsMove {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(100px);
+    }
+}
+
+.star {
+
+    position: absolute;
+
+    color: white;
+
+    font-size: 15px;
+
+    animation:
+        starTwinkle
+        2s infinite alternate;
+}
+
+@keyframes starTwinkle {
+
+    from {
+        opacity: .2;
+        transform: scale(.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+}
+
+
+/* RINGS */
+
+.light-ring {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    border:
+        2px solid
+        rgba(255,255,255,.12);
+
+    box-shadow:
+        0 0 30px
+        rgba(255,105,180,.15);
+
+    animation:
+        ringRotate
+        18s linear infinite;
+}
+
+.ring1 {
+
+    width: 450px;
+    height: 450px;
+}
+
+.ring2 {
+
+    width: 650px;
+    height: 650px;
+
+    animation-direction:
+        reverse;
+
+    animation-duration: 25s;
+}
+
+.ring3 {
+
+    width: 850px;
+    height: 850px;
+
+    animation-duration: 35s;
+}
+
+@keyframes ringRotate {
+
+    from {
+        transform:
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            rotate(360deg);
+    }
+}
+
+
+/* FINAL TITLE */
+
+.final-title {
+
+    position: relative;
+
+    z-index: 10;
+
+    font-size:
+        clamp(30px,5vw,55px);
+
+    margin-bottom: 55px;
+
+    text-align: center;
+
+    animation:
+        titleGlow
+        1.8s infinite alternate;
+}
+
+
+/* GIFT */
+
+.gift {
+
+    position: relative;
+
+    width: 230px;
+    height: 210px;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    animation:
+        giftFloat
+        1.2s infinite alternate;
+
+    transition:
+        transform 1s;
+}
+
+.gift:hover {
+
+    transform:
+        scale(1.08);
+}
+
+@keyframes giftFloat {
+
+    from {
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    to {
+        transform:
+            translateY(-20px)
+            rotate(2deg);
+    }
+}
+
+
+/* BOX */
+
+.gift-box {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 10px;
+
+    width: 210px;
+    height: 135px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff1744,
+            #c5003a
+        );
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 25px 50px
+        rgba(0,0,0,.6),
+
+        inset 0 0 25px
+        rgba(255,255,255,.15);
+}
+
+.gift-box::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 88px;
+
+    width: 34px;
+    height: 135px;
+
+    background:
+        linear-gradient(
+            #ffd700,
+            #ffb300
+        );
+
+    box-shadow:
+        0 0 15px
+        rgba(255,215,0,.7);
+}
+
+
+/* LID */
+
+.gift-lid {
+
+    position: absolute;
+
+    left: 2px;
+
+    top: 48px;
+
+    width: 225px;
+    height: 48px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4b70,
+            #dc003c
+        );
+
+    border-radius: 10px;
+
+    z-index: 5;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,.35);
+
+    transition:
+        1.3s cubic-bezier(.2,.8,.2,1);
+}
+
+.gift-lid::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 96px;
+
+    width: 34px;
+    height: 48px;
+
+    background: #ffd700;
+}
+
+
+/* RIBBON */
+
+.ribbon {
+
+    position: absolute;
+
+    width: 75px;
+    height: 75px;
+
+    border:
+        13px solid #ffd700;
+
+    border-radius: 50%;
+
+    top: -2px;
+
+    z-index: 8;
+
+    box-shadow:
+        0 0 20px
+        rgba(255,215,0,.5);
+}
+
+.ribbon.left {
+    left: 38px;
+}
+
+.ribbon.right {
+    right: 38px;
+}
+
+
+/* OPENED */
+
+.gift.opened {
+
+    animation:
+        giftOpen
+        .8s ease forwards;
+}
+
+@keyframes giftOpen {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(.8);
+        opacity: 0;
+    }
+}
+
+.gift.opened .gift-lid {
+
+    transform:
+        translateY(-150px)
+        rotate(-25deg);
+
+    opacity: 0;
+}
+
+
+/* SURPRISE */
+
+.surprise {
+
+    display: none;
+
+    position: relative;
+
+    z-index: 50;
+
+    text-align: center;
+
+    max-width: 850px;
+
+    padding: 20px;
+}
+
+.surprise.show {
+
+    display: block;
+
+    animation:
+        surpriseAppear
+        1.5s
+        cubic-bezier(.17,.67,.25,1.2);
+}
+
+@keyframes surpriseAppear {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(.1)
+            rotate(-15deg);
+    }
+
+    60% {
+
+        transform:
+            scale(1.15)
+            rotate(5deg);
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0);
+    }
+}
+
+
+/* GOLD TEXT */
+
+.gold-text {
+
+    font-size:
+        clamp(40px,8vw,85px);
+
+    font-weight: 900;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #ffd700,
+            #fff,
+            #ffb300,
+            #fff
+        );
+
+    background-size:
+        300%;
+
+    -webkit-background-clip:
+        text;
+
+    color: transparent;
+
+    animation:
+        goldMove 3s linear infinite,
+        birthdayZoom 1.5s infinite alternate;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(255,215,0,.7)
+        );
+}
+
+@keyframes goldMove {
+
+    from {
+        background-position: 0%;
+    }
+
+    to {
+        background-position: 300%;
+    }
+}
+
+@keyframes birthdayZoom {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.05);
+    }
+}
+
+
+/* TYPING */
+
+#typingText {
+
+    margin: 25px auto 0;
+
+    max-width: 700px;
+
+    min-height: 100px;
+
+    color: white;
+
+    font-size:
+        clamp(16px,2.5vw,22px);
+
+    line-height: 1.8;
+
+    text-shadow:
+        0 0 10px
+        rgba(255,255,255,.6);
+}
+
+
+/* HEARTS */
+
+.heart {
+
+    position: fixed;
+
+    bottom: -50px;
+
+    z-index: 60;
+
+    font-size:
+        20px;
+
+    pointer-events: none;
+
+    animation:
+        heartFly
+        5s linear forwards;
+}
+
+@keyframes heartFly {
+
+    0% {
+
+        transform:
+            translateY(0)
+            scale(.5)
+            rotate(0);
+
+        opacity: 1;
+    }
+
+    100% {
+
+        transform:
+            translateY(-110vh)
+            scale(1.7)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* FIREWORK */
+
+.firework {
+
+    position: fixed;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    z-index: 55;
+
+    pointer-events: none;
+
+    box-shadow:
+        0 0 10px white;
+}
+
+
+/* CONFETTI */
+
+.confetti {
+
+    position: fixed;
+
+    top: -30px;
+
+    z-index: 100;
+
+    width: 10px;
+    height: 14px;
+
+    pointer-events: none;
+
+    animation:
+        confettiFall
+        4s linear forwards;
+}
+
+@keyframes confettiFall {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+
+    100% {
+
+        transform:
+            translateY(110vh)
+            rotate(1000deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px) {
+
+    .company-header {
+        padding: 0 18px;
+    }
+
+    .logo-area img {
+        width: 75px;
+    }
+
+    .company-text {
+        font-size: 10px;
+    }
+
+    .security {
+        display: none;
+    }
+
+    .demo-badge {
+
+        top: 80px;
+        right: 10px;
+
+        font-size: 8px;
+    }
+
+    .application-container {
+
+        width: 95%;
+
+        margin-top: 25px;
+    }
+
+    .application-card {
+
+        padding: 22px;
+    }
+
+    .application-card h1 {
+
+        font-size: 23px;
+    }
+
+    .form-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .step-line {
+
+        width: 25px;
+
+        margin: 0 5px;
+    }
+
+    .step {
+
+        font-size: 9px;
+    }
+
+    .photo-frame {
+
+        width: 230px;
+
+        height: 290px;
+    }
+
+    .memory-timeline {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 10px;
+    }
+
+    .memory-card {
+
+        min-height: auto;
+
+        padding: 15px;
+    }
+
+    .memory-content h1 {
+
+        font-size: 38px;
+    }
+
+    .memory-subtitle {
+
+        font-size: 13px;
+
+        margin-bottom: 15px;
+    }
+
+    .memory-card p {
+
+        font-size: 12px;
+    }
+
+    .wish-content h1 {
+
+        font-size: 40px;
+    }
+
+    .wish-intro {
+
+        font-size: 14px;
+    }
+
+    .wish-message {
+
+        padding: 20px;
+
+        margin-top: 20px;
+    }
+
+    .wish-message h2 {
+
+        font-size: 23px;
+    }
+
+    .wish-message p {
+
+        font-size: 13px;
+    }
+
+    .gift {
+
+        transform:
+            scale(.85);
+    }
+
+    .ring3 {
+
+        display: none;
+    }
+
+}
+
+
+/* =====================================================
+   END CSS
+===================================================== */
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     PAGE 1 - APPLICATION
+===================================================== -->
+
+<section
+    id="applicationPage"
+    class="screen active"
+>
+
+<header class="company-header">
+
+    <div class="logo-area">
+
+        <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1S-SVnzzomHqH7D7Cf0BN1kR2IYZy6MP9AlCY4z-FWw&s=10"
+            alt="Company Logo"
+        >
+
+        <div class="logo-divider"></div>
+
+        <div class="company-text">
+            Careers & Recruitment
+        </div>
+
+    </div>
+
+    <div class="security">
+        🔒 Secure Application Portal
+    </div>
+
+</header>
+
+
+<main class="application-container">
+
+    <div class="steps">
+
+        <div class="step active">
+
+            <div class="step-number">
+                1
+            </div>
+
+            Application
+
+        </div>
+
+        <div class="step-line"></div>
+
+        <div class="step">
+
+            <div class="step-number">
+                2
+            </div>
+
+            Documents
+
+        </div>
+
+        <div class="step-line"></div>
+
+        <div class="step">
+
+            <div class="step-number">
+                3
+            </div>
+
+            Review
+
+        </div>
+
+    </div>
+
+
+    <div class="application-card">
+
+        <h1>
+            Apply for a New Opportunity
+        </h1>
+
+        <p class="subtitle">
+            Complete your application with the required information.
+        </p>
+
+
+        <div class="notice">
+
+            💼 <b>New Candidate Application</b>
+
+            <br>
+
+            Please provide accurate information and upload
+            the required documents.
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="input-group">
+
+                <label>
+                    Full Name *
+                </label>
+
+                <input
+                    id="name"
+                    type="text"
+                    placeholder="Enter your full name"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Phone Number *
+                </label>
+
+                <input
+                    id="phone"
+                    type="tel"
+                    placeholder="+91 XXXXX XXXXX"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Email ID *
+                </label>
+
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="example@gmail.com"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    College Name *
+                </label>
+
+                <input
+                    id="college"
+                    type="text"
+                    placeholder="Enter college name"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    CGPA *
+                </label>
+
+                <input
+                    id="cgpa"
+                    type="number"
+                    min="0"
+                    max="10"
+                    step=".01"
+                    placeholder="Example: 8.50"
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Any Backlog? *
+                </label>
+
+                <select id="backlog">
+
+                    <option value="">
+                        Select
+                    </option>
+
+                    <option value="No">
+                        No
+                    </option>
+
+                    <option value="Yes">
+                        Yes
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="documents-title">
+
+            <h3>
+                Required Documents
+            </h3>
+
+            <span>
+                PDF / JPG / PNG
+            </span>
+
+        </div>
+
+
+        <div class="document">
+
+            <div class="document-left">
+
+                <div class="document-icon">
+                    📄
+                </div>
+
+                <div>
+
+                    <div class="document-name">
+                        Resume / CV *
+                    </div>
+
+                    <div
+                        class="document-status"
+                        id="cvStatus"
+                    >
+                        PDF preferred
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <label class="upload-button">
+
+                Upload CV
+
+                <input
+                    id="cvFile"
+                    type="file"
+                    hidden
+                    accept=".pdf,.doc,.docx"
+                    onchange="uploadDocument(this,'cvStatus')"
+                >
+
+            </label>
+
+        </div>
+
+
+        <div class="document">
+
+            <div class="document-left">
+
+                <div class="document-icon">
+                    🎓
+                </div>
+
+                <div>
+
+                    <div class="document-name">
+                        Provisional Certificate *
+                    </div>
+
+                    <div
+                        class="document-status"
+                        id="marksheetStatus"
+                    >
+                        PDF / JPG / PNG
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <label class="upload-button">
+
+                Upload
+
+                <input
+                    id="marksheetFile"
+                    type="file"
+                    hidden
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onchange="uploadDocument(this,'marksheetStatus')"
+                >
+
+            </label>
+
+        </div>
+
+
+        <div class="document">
+
+            <div class="document-left">
+
+                <div class="document-icon">
+                    🪪
+                </div>
+
+                <div>
+
+                    <div class="document-name">
+                        Identity Proof *
+                    </div>
+
+                    <div
+                        class="document-status"
+                        id="idStatus"
+                    >
+                        PDF / JPG / PNG
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <label class="upload-button">
+
+                Upload
+
+                <input
+                    id="idFile"
+                    type="file"
+                    hidden
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onchange="uploadDocument(this,'idStatus')"
+                >
+
+            </label>
+
+        </div>
+
+
+        <div class="apply-section">
+
+            <button
+                class="apply-button"
+                onclick="applyNow()"
+            >
+                Apply Now →
+            </button>
+
+        </div>
+
+
+        <div
+            class="loading-box"
+            id="loadingBox"
+        >
+
+            <div class="loading-bar">
+
+                <div
+                    class="loading-fill"
+                    id="loadingFill"
+                ></div>
+
+            </div>
+
+            <div
+                class="loading-text"
+                id="loadingText"
+            >
+                Processing application...
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+</section>
+
+
+<!-- =====================================================
+     PAGE 2
+===================================================== -->
+
+<section
+    id="birthdayPage"
+    class="screen"
+>
+
+    <h1>
+        🎉 Congratulations! 🎉
+    </h1>
+
+    <p>
+        Your application has been successfully submitted...
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     PAGE 3
+===================================================== -->
+
+<section
+    id="cakePage"
+    class="screen"
+>
+
+    <h1>
+        🎂 Wait... Something Special! 🎂
+    </h1>
+
+
+    <div class="cake">
+
+        <div class="candle candle1">
+            <div class="flame"></div>
+        </div>
+
+        <div class="candle candle2">
+            <div class="flame"></div>
+        </div>
+
+        <div class="candle candle3">
+            <div class="flame"></div>
+        </div>
+
+        <div class="cream"></div>
+
+        <div class="cake-body"></div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PAGE 4
+===================================================== -->
+
+<section
+    id="photoPage"
+    class="screen"
+>
+
+    <div class="photo-frame">
+
+        <img
+            src="dd.jpeg"
+            alt="Birthday Photo"
+        >
+
+    </div>
+
+    <h1>
+        ❤️ Happy Birthday! ❤️
+    </h1>
+
+    <p>
+        Today is all about you ✨
+    </p>
+
+</section>
+
+
+<!-- =====================================================
+     PAGE 5 - MEMORY
+===================================================== -->
+
+<section
+    id="memoryPage"
+    class="screen"
+>
+
+    <div class="memory-bg"></div>
+
+    <div class="memory-content">
+
+        <div class="memory-label">
+            ✨ A LITTLE LOOK BACK ✨
+        </div>
+
+        <h1>
+            Beautiful Moments
+        </h1>
+
+        <p class="memory-subtitle">
+            Some moments become memories,
+            and some memories become forever. ❤️
+        </p>
+
+
+        <div class="memory-timeline">
+
+            <div class="memory-card">
+
+                <div class="memory-icon">
+                    🌸
+                </div>
+
+                <h3>
+                    Smile More
+                </h3>
+
+                <p>
+                    Your smile has the power to make
+                    ordinary moments special.
+                </p>
+
+            </div>
+
+
+            <div class="memory-card">
+
+                <div class="memory-icon">
+                    ✨
+                </div>
+
+                <h3>
+                    Dream Big
+                </h3>
+
+                <p>
+                    Keep believing in yourself and
+                    continue chasing your dreams.
+                </p>
+
+            </div>
+
+
+            <div class="memory-card">
+
+                <div class="memory-icon">
+                    💜
+                </div>
+
+                <h3>
+                    Stay Beautiful
+                </h3>
+
+                <p>
+                    Not just beautiful outside,
+                    but beautiful from the heart.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="memory-bottom">
+            🌷 More beautiful memories are waiting for you...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PAGE 6 - SPECIAL WISH
+===================================================== -->
+
+<section
+    id="wishPage"
+    class="screen"
+>
+
+    <div class="wish-stars"></div>
+
+    <div class="wish-content">
+
+        <div class="wish-moon">
+            🌙
+        </div>
+
+        <div class="wish-label">
+            💌 A SPECIAL MESSAGE
+        </div>
+
+        <h1>
+            A Wish Just For You
+        </h1>
+
+        <p class="wish-intro">
+            Before the final surprise...
+            there is one more thing I want you to know.
+        </p>
+
+
+        <button
+            class="wish-button"
+            onclick="revealWish()"
+        >
+            💖 Open My Wish
+        </button>
+
+
+        <div
+            id="wishMessage"
+            class="wish-message"
+        >
+
+            <div class="wish-heart">
+                ❤️
+            </div>
+
+            <h2>
+                May Your Dreams Come True
+            </h2>
+
+            <p>
+                May every new chapter of your life
+                bring you happiness, success,
+                peace and countless reasons to smile.
+
+                <br><br>
+
+                Never stop believing in yourself.
+                Keep shining exactly the way you do. ✨
+            </p>
+
+            <div class="wish-signature">
+                With lots of love ❤️
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PAGE 7 - FINAL GIFT
+===================================================== -->
+
+<section
+    id="giftPage"
+    class="screen"
+>
+
+    <div class="stars"></div>
+
+    <div class="light-ring ring1"></div>
+    <div class="light-ring ring2"></div>
+    <div class="light-ring ring3"></div>
+
+
+    <h1 class="final-title">
+        🎁 One Final Surprise 🎁
+    </h1>
+
+
+    <div
+        class="gift"
+        id="gift"
+        onclick="openGift()"
+    >
+
+        <div class="ribbon left"></div>
+
+        <div class="ribbon right"></div>
+
+        <div class="gift-lid"></div>
+
+        <div class="gift-box"></div>
+
+    </div>
+
+
+    <div
+        class="surprise"
+        id="surprise"
+    >
+
+        <h2 class="gold-text">
+            ✨ HAPPY BIRTHDAY PRIYANJANA ✨
+        </h2>
+
+        <p id="typingText"></p>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =====================================================
+   PAGE CHANGE
+===================================================== */
+
+function showPage(id) {
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(page => {
+
+            page.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+}
+
+
+/* =====================================================
+   DOCUMENT UPLOAD
+===================================================== */
+
+function uploadDocument(input, statusId) {
+
+    if (input.files.length > 0) {
+
+        const file =
+            input.files[0].name;
+
+        const status =
+            document.getElementById(statusId);
+
+        status.innerHTML =
+            "✓ " + file;
+
+        status.style.color =
+            "#188038";
+
+    }
+
+}
+
+
+/* =====================================================
+   APPLY
+===================================================== */
+
+function applyNow() {
+
+    const name =
+        document
+        .getElementById("name")
+        .value.trim();
+
+    const phone =
+        document
+        .getElementById("phone")
+        .value.trim();
+
+    const email =
+        document
+        .getElementById("email")
+        .value.trim();
+
+    const college =
+        document
+        .getElementById("college")
+        .value.trim();
+
+    const cgpa =
+        document
+        .getElementById("cgpa")
+        .value;
+
+    const backlog =
+        document
+        .getElementById("backlog")
+        .value;
+
+
+    if (name === "") {
+
+        alert(
+            "Please enter your Full Name."
+        );
+
+        return;
+    }
+
+
+    if (phone === "") {
+
+        alert(
+            "Please enter your Phone Number."
+        );
+
+        return;
+    }
+
+
+    if (email === "") {
+
+        alert(
+            "Please enter your Email ID."
+        );
+
+        return;
+    }
+
+
+    if (college === "") {
+
+        alert(
+            "Please enter your College Name."
+        );
+
+        return;
+    }
+
+
+    if (cgpa === "") {
+
+        alert(
+            "Please enter your CGPA."
+        );
+
+        return;
+    }
+
+
+    if (backlog === "") {
+
+        alert(
+            "Please select Backlog status."
+        );
+
+        return;
+    }
+
+
+    const loadingBox =
+        document.getElementById(
+            "loadingBox"
+        );
+
+    const loadingFill =
+        document.getElementById(
+            "loadingFill"
+        );
+
+    const loadingText =
+        document.getElementById(
+            "loadingText"
+        );
+
+
+    loadingBox.style.display =
+        "block";
+
+
+    let progress = 0;
+
+
+    const messages = [
+
+        "Checking candidate details...",
+
+        "Validating contact information...",
+
+        "Checking academic details...",
+
+        "Reviewing CV...",
+
+        "Verifying documents...",
+
+        "Submitting application..."
+
+    ];
+
+
+    const timer =
+        setInterval(() => {
+
+            progress += 2;
+
+            loadingFill.style.width =
+                progress + "%";
+
+
+            const index =
+                Math.min(
+                    Math.floor(
+                        progress / 17
+                    ),
+                    messages.length - 1
+                );
+
+
+            loadingText.innerHTML =
+                "⏳ " +
+                messages[index];
+
+
+            if (progress >= 100) {
+
+                clearInterval(timer);
+
+
+                loadingText.innerHTML =
+                    "✓ Application Submitted Successfully!";
+
+
+                setTimeout(() => {
+
+                    startBirthday();
+
+                }, 1200);
+
+            }
+
+        }, 60);
+
+}
+
+
+/* =====================================================
+   START BIRTHDAY
+===================================================== */
+
+function startBirthday() {
+
+    showPage("birthdayPage");
+
+    createBalloons();
+
+
+    setTimeout(() => {
+
+        showPage("cakePage");
+
+        lightCandles();
+
+    }, 6000);
+
+}
+
+
+/* =====================================================
+   BALLOONS
+===================================================== */
+
+function createBalloons() {
+
+    const colors = [
+
+        "#ff1744",
+        "#00e5ff",
+        "#ffd600",
+        "#76ff03",
+        "#e040fb",
+        "#ff9100",
+        "#ff4081",
+        "#7c4dff"
+
+    ];
+
+
+    for (
+        let i = 0;
+        i < 40;
+        i++
+    ) {
+
+        const balloon =
+            document.createElement(
+                "div"
+            );
+
+
+        balloon.className =
+            "balloon";
+
+
+        balloon.style.background =
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ];
+
+
+        balloon.style.left =
+            Math.random() * 100 +
+            "vw";
+
+
+        balloon.style.animationDuration =
+            4 +
+            Math.random() * 3 +
+            "s";
+
+
+        balloon.style.animationDelay =
+            Math.random() * 2 +
+            "s";
+
+
+        document.body.appendChild(
+            balloon
+        );
+
+
+        setTimeout(() => {
+
+            balloon.remove();
+
+        }, 9000);
+
+    }
+
+}
+
+
+/* =====================================================
+   CANDLES
+===================================================== */
+
+function lightCandles() {
+
+    const flames =
+        document.querySelectorAll(
+            ".flame"
+        );
+
+
+    flames.forEach(
+        (flame, index) => {
+
+            setTimeout(() => {
+
+                flame.classList.add(
+                    "on"
+                );
+
+            }, index * 900);
+
+        }
+    );
+
+
+    /* Photo */
+
+    setTimeout(() => {
+
+        showPage("photoPage");
+
+    }, 4800);
+
+
+    /* Memory */
+
+    setTimeout(() => {
+
+        showPage("memoryPage");
+
+    }, 7800);
+
+
+    /* Special Wish */
+
+    setTimeout(() => {
+
+        showPage("wishPage");
+
+    }, 11500);
+
+}
+
+
+/* =====================================================
+   SPECIAL WISH
+===================================================== */
+
+function revealWish() {
+
+    const message =
+        document.getElementById(
+            "wishMessage"
+        );
+
+
+    message.classList.add(
+        "show"
+    );
+
+
+    createWishHearts();
+
+
+    setTimeout(() => {
+
+        showPage("giftPage");
+
+        createFinalStars();
+
+    }, 7000);
+
+}
+
+
+function createWishHearts() {
+
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
+
+        setTimeout(() => {
+
+            const heart =
+                document.createElement(
+                    "div"
+                );
+
+
+            heart.className =
+                "heart";
+
+
+            heart.innerHTML =
+                [
+                    "❤️",
+                    "💖",
+                    "💕",
+                    "💗",
+                    "💜"
+                ][
+                    Math.floor(
+                        Math.random() * 5
+                    )
+                ];
+
+
+            heart.style.left =
+                Math.random() * 100 +
+                "vw";
+
+
+            heart.style.fontSize =
+                15 +
+                Math.random() * 25 +
+                "px";
+
+
+            document.body.appendChild(
+                heart
+            );
+
+
+            setTimeout(() => {
+
+                heart.remove();
+
+            }, 5000);
+
+        }, i * 100);
+
+    }
+
+}
+
+
+/* =====================================================
+   FINAL STARS
+===================================================== */
+
+function createFinalStars() {
+
+    const giftPage =
+        document.getElementById(
+            "giftPage"
+        );
+
+
+    giftPage
+        .querySelectorAll(".star")
+        .forEach(star => star.remove());
+
+
+    for (
+        let i = 0;
+        i < 70;
+        i++
+    ) {
+
+        const star =
+            document.createElement(
+                "div"
+            );
+
+
+        star.className =
+            "star";
+
+
+        star.innerHTML =
+            Math.random() > .5
+                ? "✦"
+                : "✧";
+
+
+        star.style.left =
+            Math.random() * 100 +
+            "vw";
+
+
+        star.style.top =
+            Math.random() * 100 +
+            "vh";
+
+
+        star.style.animationDelay =
+            Math.random() * 2 +
+            "s";
+
+
+        giftPage.appendChild(
+            star
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   OPEN GIFT
+===================================================== */
+
+let giftOpened = false;
+
+
+function openGift() {
+
+    if (giftOpened) {
+        return;
+    }
+
+
+    giftOpened = true;
+
+
+    const gift =
+        document.getElementById(
+            "gift"
+        );
+
+
+    gift.classList.add(
+        "opened"
+    );
+
+
+    createConfetti();
+
+    createFireworks();
+
+    createHearts();
+
+
+    setTimeout(() => {
+
+        document
+            .getElementById(
+                "surprise"
+            )
+            .classList.add(
+                "show"
+            );
+
+
+        typeMessage();
+
+    }, 700);
+
+}
+
+
+/* =====================================================
+   TYPING MESSAGE
+===================================================== */
+
+function typeMessage() {
+
+    const message =
+        "May your life always be filled with happiness, success, love, laughter and beautiful memories. Keep smiling, keep shining and keep achieving your dreams. ❤️✨";
+
+
+    const element =
+        document.getElementById(
+            "typingText"
+        );
+
+
+    element.innerHTML = "";
+
+
+    let i = 0;
+
+
+    const typing =
+        setInterval(() => {
+
+            element.innerHTML +=
+                message.charAt(i);
+
+            i++;
+
+
+            if (
+                i >= message.length
+            ) {
+
+                clearInterval(
+                    typing
+                );
+
+            }
+
+        }, 45);
+
+}
+
+
+/* =====================================================
+   HEARTS
+===================================================== */
+
+function createHearts() {
+
+    setInterval(() => {
+
+        const heart =
+            document.createElement(
+                "div"
+            );
+
+
+        heart.className =
+            "heart";
+
+
+        heart.innerHTML =
+            [
+                "💖",
+                "💕",
+                "💗",
+                "❤️",
+                "💜"
+            ][
+                Math.floor(
+                    Math.random() * 5
+                )
+            ];
+
+
+        heart.style.left =
+            Math.random() * 100 +
+            "vw";
+
+
+        heart.style.fontSize =
+            18 +
+            Math.random() * 25 +
+            "px";
+
+
+        document.body.appendChild(
+            heart
+        );
+
+
+        setTimeout(() => {
+
+            heart.remove();
+
+        }, 5000);
+
+
+    }, 300);
+
+}
+
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+function createConfetti() {
+
+    const colors = [
+
+        "#ff1744",
+        "#ffd600",
+        "#00e5ff",
+        "#76ff03",
+        "#e040fb",
+        "#ff9100",
+        "#ffffff"
+
+    ];
+
+
+    for (
+        let i = 0;
+        i < 300;
+        i++
+    ) {
+
+        const confetti =
+            document.createElement(
+                "div"
+            );
+
+
+        confetti.className =
+            "confetti";
+
+
+        confetti.style.left =
+            Math.random() * 100 +
+            "vw";
+
+
+        confetti.style.background =
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ];
+
+
+        confetti.style.width =
+            5 +
+            Math.random() * 10 +
+            "px";
+
+
+        confetti.style.height =
+            5 +
+            Math.random() * 15 +
+            "px";
+
+
+        confetti.style.animationDuration =
+            2 +
+            Math.random() * 4 +
+            "s";
+
+
+        confetti.style.animationDelay =
+            Math.random() * 1.5 +
+            "s";
+
+
+        document.body.appendChild(
+            confetti
+        );
+
+
+        setTimeout(() => {
+
+            confetti.remove();
+
+        }, 7000);
+
+    }
+
+}
+
+
+/* =====================================================
+   FIREWORKS
+===================================================== */
+
+function createFireworks() {
+
+    let count = 0;
+
+
+    const fireworks =
+        setInterval(() => {
+
+            launchFirework();
+
+            count++;
+
+
+            if (count >= 12) {
+
+                clearInterval(
+                    fireworks
+                );
+
+            }
+
+        }, 600);
+
+}
+
+
+function launchFirework() {
+
+    const centerX =
+        15 +
+        Math.random() * 70;
+
+
+    const centerY =
+        15 +
+        Math.random() * 50;
+
+
+    const colors = [
+
+        "#ff1744",
+        "#ffd600",
+        "#00e5ff",
+        "#76ff03",
+        "#ff69b4",
+        "#ffffff"
+
+    ];
+
+
+    const color =
+        colors[
+            Math.floor(
+                Math.random() *
+                colors.length
+            )
+        ];
+
+
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
+
+        const particle =
+            document.createElement(
+                "div"
+            );
+
+
+        particle.className =
+            "firework";
+
+
+        particle.style.left =
+            centerX + "vw";
+
+
+        particle.style.top =
+            centerY + "vh";
+
+
+        particle.style.background =
+            color;
+
+
+        const angle =
+            (Math.PI * 2 * i) /
+            35;
+
+
+        const distance =
+            50 +
+            Math.random() * 100;
+
+
+        const x =
+            Math.cos(angle) *
+            distance;
+
+
+        const y =
+            Math.sin(angle) *
+            distance;
+
+
+        particle.animate(
+
+            [
+
+                {
+                    transform:
+                        "translate(0,0) scale(1)",
+
+                    opacity: 1
+                },
+
+                {
+
+                    transform:
+                        `translate(${x}px,${y}px) scale(0)`,
+
+                    opacity: 0
+                }
+
+            ],
+
+            {
+
+                duration:
+                    1000 +
+                    Math.random() * 800,
+
+                easing:
+                    "cubic-bezier(.1,.7,.2,1)",
+
+                fill:
+                    "forwards"
+
+            }
+
+        );
+
+
+        document.body.appendChild(
+            particle
+        );
+
+
+        setTimeout(() => {
+
+            particle.remove();
+
+        }, 2000);
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>
+
